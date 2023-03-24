@@ -18,10 +18,39 @@ function addButtonClick(){
 
     const now = Date.now();
     const id = now.toString();
-    //console.log("id+" +  $(id));
-    
 
-    let brandname = brand.value
+    let brandname = brand.value;
+
+    if (brandname !== ""){
+        let car = new bil(brand.value, color.value, id);
+        billista.push(car);
+
+        brand.value="";
+        color.value="";
+        lista_bilar_div.innerHTML("");
+
+        billista.forEach(createHtmlBillista)
+    }
+    else{
+        alert("fill fabrikat")
+    }
 
     console.log(`id= ${id} brand = ${brandname}`);
+}
+
+const createHtmlBillista = () => {
+    const bildiv = document.createElement("div");
+    bildiv.className = "bil_div_element";
+
+    const bilH2 = document.CreateElement("h2");
+    const bilPcolor = document.createElement("p");
+    const bilDelButt = document.createElement("button");
+
+    bilH2.innerText = `${bil.brand}`
+    bilPcolor.innerText = `Färg: ${bil.color}`
+    bilDelButt.innerText = `Delete`
+    bilDelButt.id = bil.id
+
+    bildiv.append(bilH2, bilPcolor, bilDelButt)
+    lista_bilar_div.appendChild(bildiv);
 }
